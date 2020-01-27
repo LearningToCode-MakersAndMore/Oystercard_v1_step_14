@@ -1,6 +1,6 @@
-## Oystercard Challenge
+# Oystercard Challenge
 
-# How to use
+## How to use
 
 Run ```irb``` in terminal
 

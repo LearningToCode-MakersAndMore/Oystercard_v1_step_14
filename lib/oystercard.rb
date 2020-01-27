@@ -6,6 +6,10 @@ class Oystercard
     self.balance = balance
   end
 
+  def top_up(amount)
+    @balance += amount
+  end
+
   private
   attr_writer :balance
 
