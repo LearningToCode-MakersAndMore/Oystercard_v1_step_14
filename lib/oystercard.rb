@@ -1,5 +1,3 @@
-MAX_BALANCE = 90
-
 class Oystercard
 
   attr_reader :balance
@@ -13,6 +11,9 @@ class Oystercard
 
     @balance += amount
   end
+
+  MAX_BALANCE = 90
+
 
   private
   attr_writer :balance
