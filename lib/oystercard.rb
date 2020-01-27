@@ -12,8 +12,11 @@ class Oystercard
     @balance += amount
   end
 
-  MAX_BALANCE = 90
+  def deduct
+    @balance -= 5
+  end
 
+  MAX_BALANCE = 90
 
   private
   attr_writer :balance
