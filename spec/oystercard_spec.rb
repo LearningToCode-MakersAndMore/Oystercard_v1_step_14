@@ -22,4 +22,11 @@ describe Oystercard do
     expect(subject.touch_in).to eq(true)
   end
 
+  it 'oystercard.touch_out should result in in_use == false' do
+    expect(subject.touch_out).to eq(false)
+  end
+
+  it 'oystercard.in_journey should return true or false' do
+    expect(subject.in_journey?).to be_truthy.or be_falsey
+  end
 end
