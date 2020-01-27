@@ -18,4 +18,8 @@ describe Oystercard do
     expect{ subject.deduct(5) }.to change{ subject.balance }.by(-5)
   end
 
+  it 'oystercard.touch_in should result in in_use == true' do
+    expect(subject.touch_in).to eq(true)
+  end
+
 end

@@ -1,6 +1,8 @@
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :in_use
+
+  MAX_BALANCE = 90
 
   def initialize(balance = 0)
     self.balance = balance
@@ -16,9 +18,11 @@ class Oystercard
     @balance -= amount
   end
 
-  MAX_BALANCE = 90
+  def touch_in
+    self.in_use = true
+  end
 
   private
-  attr_writer :balance
+  attr_writer :balance, :in_use
 
 end
