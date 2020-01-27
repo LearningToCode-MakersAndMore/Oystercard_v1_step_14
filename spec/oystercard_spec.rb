@@ -15,7 +15,7 @@ describe Oystercard do
   end
 
   it 'oystercard.deduct should deduct fare from balance' do
-    expect{ subject.deduct }.to change{ subject.balance }.by(-5)
+    expect{ subject.deduct(5) }.to change{ subject.balance }.by(-5)
   end
 
 end
