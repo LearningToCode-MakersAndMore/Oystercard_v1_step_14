@@ -39,4 +39,5 @@ describe Oystercard do
     subject.touch_out('Australia')
     expect(subject.trips).to eq('Start: France, End: Australia')
   end
+  
 end
