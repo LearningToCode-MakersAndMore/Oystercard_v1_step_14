@@ -6,14 +6,14 @@ class Oystercard
   MINIMUM_FARE = 1
 
   def initialize(balance = 0)
-    self.balance = balance
+    @balance = balance
     @in_use = false
   end
 
   def top_up(amount)
     raise("maximum balance = #{MAX_BALANCE}") if self.balance + amount > 90
 
-    @balance += amount
+    self.balance += amount
   end
 
   def touch_in
@@ -27,14 +27,14 @@ class Oystercard
   end
 
   def in_journey?
-    @in_use
+    self.in_use
   end
 
   private
   attr_writer :balance, :in_use
 
   def deduct(amount)
-    @balance -= amount
+    self.balance -= amount
   end
 
 end
