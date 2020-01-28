@@ -19,6 +19,7 @@ describe Oystercard do
   end
 
   it 'oystercard.touch_in should result in in_use == true' do
+    subject.top_up(10)
     expect(subject.touch_in).to eq(true)
   end
 
@@ -28,5 +29,8 @@ describe Oystercard do
 
   it 'oystercard.in_journey should return true or false' do
     expect(subject.in_journey?).to be_truthy.or be_falsey
+  end
+  it "oystercard.touch_in should raise error if balance < #{Oystercard::MINIMUM_FARE}" do
+    expect{ subject.touch_in }.to raise_error "Insufficent funds: £#{Oystercard::MINIMUM_FARE} required to travel"
   end
 end
