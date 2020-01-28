@@ -8,6 +8,7 @@ class Oystercard
   def initialize(balance = 0)
     @balance = balance
     @entry_station = nil
+    @trips = []
   end
 
   def top_up(amount)
@@ -21,8 +22,10 @@ class Oystercard
     self.entry_station = station
   end
 
-  def touch_out
+  def touch_out(exit_station = 0)
    self.deduct(MINIMUM_FARE)
+   trip = {Start: @entry_station, End: exit_station}
+   self.trips << trip
    self.entry_station = nil
   end
 
@@ -30,8 +33,12 @@ class Oystercard
     self.entry_station == nil ? false : true
   end
 
+  def trips
+    @trips.each { |journey| return "Start: #{journey[:Start]}, End: #{journey[:End]}" }
+  end
+
   private
-  attr_writer :balance, :entry_station
+  attr_writer :balance, :entry_station, :trips
 
   def deduct(amount)
     self.balance -= amount

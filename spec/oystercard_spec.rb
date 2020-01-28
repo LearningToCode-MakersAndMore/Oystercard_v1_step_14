@@ -10,7 +10,7 @@ describe Oystercard do
     expect{ subject.top_up(10) }.to change{ subject.balance }.by(10)
   end
 
-  it 'oystercard.top_up should return error if balance > 90' do
+  it "oystercard.top_up should return error if balance > #{Oystercard::MINIMUM_FARE}" do
     expect {subject.top_up(Oystercard::MAX_BALANCE + 1)}.to raise_error("maximum balance = #{Oystercard::MAX_BALANCE}")
   end
 
@@ -29,4 +29,14 @@ describe Oystercard do
     expect { subject.touch_in("station") }.to change { subject.entry_station }.to("station")
   end
 
+  it 'oystercard.trips should eq []' do
+    expect(subject.trips).to eq([])
+  end
+
+  it 'trips should return entry and exit stations' do
+    subject.top_up(50)
+    subject.touch_in('France')
+    subject.touch_out('Australia')
+    expect(subject.trips).to eq('Start: France, End: Australia')
+  end
 end
