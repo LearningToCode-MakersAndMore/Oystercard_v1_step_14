@@ -1,3 +1,5 @@
+require 'journey.rb'
+
 class Oystercard
 
   attr_reader :balance, :entry_station
@@ -8,7 +10,8 @@ class Oystercard
   def initialize(balance = 0)
     @balance = balance
     @entry_station = nil
-    @trips = []
+    @exit_station = nil
+    @trip_log = Journey.new
   end
 
   def top_up(amount)
@@ -23,10 +26,9 @@ class Oystercard
   end
 
   def touch_out(exit_station = 0)
-   self.deduct(MINIMUM_FARE)
-   trip = {Start: @entry_station, End: exit_station}
-   self.trips << trip
-   self.entry_station = nil
+    self.exit_station = exit_station
+    self.deduct(MINIMUM_FARE)
+    @trip_log.trip(@entry_station, @exit_station)
   end
 
   def in_journey?
@@ -34,11 +36,11 @@ class Oystercard
   end
 
   def trips
-    @trips.each { |journey| return "Start: #{journey[:Start]}, End: #{journey[:End]}" }
+    @trip_log.trip_list
   end
 
   private
-  attr_writer :balance, :entry_station, :trips
+  attr_writer :balance, :entry_station, :exit_station, :trips
 
   def deduct(amount)
     self.balance -= amount
