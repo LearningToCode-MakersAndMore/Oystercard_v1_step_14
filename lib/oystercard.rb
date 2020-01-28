@@ -16,16 +16,13 @@ class Oystercard
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def touch_in
     fail "Insufficent funds: £#{MINIMUM_FARE} required to travel" unless @balance > MINIMUM_FARE
     self.in_use = true
   end
 
   def touch_out
+   self.deduct(MINIMUM_FARE)
    self.in_use = false
   end
 
@@ -35,5 +32,9 @@ class Oystercard
 
   private
   attr_writer :balance, :in_use
+
+  def deduct(amount)
+    @balance -= amount
+  end
 
 end

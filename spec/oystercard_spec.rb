@@ -33,4 +33,9 @@ describe Oystercard do
   it "oystercard.touch_in should raise error if balance < #{Oystercard::MINIMUM_FARE}" do
     expect{ subject.touch_in }.to raise_error "Insufficent funds: £#{Oystercard::MINIMUM_FARE} required to travel"
   end
+
+  it "oystercard.touch_out should reduce balance by #{Oystercard::MINIMUM_FARE}" do
+    expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
+  end
+
 end
