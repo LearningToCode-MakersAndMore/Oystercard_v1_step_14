@@ -24,5 +24,9 @@ describe Oystercard do
   it "oystercard.touch_out should reduce balance by #{Oystercard::MINIMUM_FARE}" do
     expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
   end
+  it "oystercard should remember the last station it was touched in at" do
+    subject.top_up(10)
+    expect { subject.touch_in("station") }.to change { subject.entry_station }.to("station")
+  end
 
 end
